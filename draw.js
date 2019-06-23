@@ -1,4 +1,5 @@
 const fs = require('fs')
+const process = require('process')
 
 STYLE = `<style>
   .text { font: 9px sans-serif; }
@@ -14,7 +15,7 @@ const appendRect = (text, index) => {
 `
 }
 
-contents = ["OP_6", "OP_EQUAL"].map((element, index) => {
+contents = process.argv[2].split(",").map((element, index) => {
   return appendRect(element, index)
 }).join("")
 
