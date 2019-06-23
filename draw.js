@@ -1,5 +1,6 @@
 const fs = require('fs')
 const process = require('process')
+const script_opcodes = process.argv[2].split(",")
 
 STYLE = `<style>
   .text { font: 9px sans-serif; }
@@ -16,10 +17,10 @@ const appendRect = (text, index) => {
 `
 }
 
-contents = process.argv[2].split(",").map((element, index) => {
+contents = script_opcodes.map((element, index) => {
   return appendRect(element, index)
 })
 
-FILE = `<svg width="${WIDTH}" xmlns="http://www.w3.org/2000/svg">${STYLE}${contents}</svg>`
+FILE = `<svg width="${WIDTH}" xmlns="http://www.w3.org/2000/svg">${STYLE}${contents.join("")}</svg>`
 
 fs.writeFileSync('output.svg', FILE)
