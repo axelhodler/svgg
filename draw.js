@@ -18,8 +18,8 @@ const rectWithText = (x_offset, rect_y, text_y, text) => {
 `
 }
 
-const scriptRect = (text, index) => {
-  rect_y = index * BLOCK_HEIGHT
+const scriptRect = (y_offset, text, index) => {
+  rect_y = index * BLOCK_HEIGHT + y_offset
   text_y = rect_y + 8
   return rectWithText(0, rect_y, text_y, text)
 }
@@ -30,13 +30,21 @@ const stackRect = (y_offset, text, index) => {
   return rectWithText(COLUMN_WIDTH * 2, rect_y, text_y, text)
 }
 
+const delta = script_opcodes.length - stack_state.length
+opcode_y_offset = 0
+stack_y_offset = 0
+if (delta < 0) { // stack is higher
+  opcode_y_offset = (stack_state.length - script_opcodes.length) * BLOCK_HEIGHT
+} else { // more opcodes than stack size
+  stack_y_offset = (script_opcodes.length - stack_state.length) * BLOCK_HEIGHT
+}
+
 contents = script_opcodes.map((element, index) => {
-  return scriptRect(element, index)
+  return scriptRect(opcode_y_offset, element, index)
 })
 
 stack_contents = stack_state.map((element, index) => {
-  y_offset = (script_opcodes.length - stack_state.length) * BLOCK_HEIGHT
-  return stackRect(y_offset, element, index)
+  return stackRect(stack_y_offset, element, index)
 })
 
 FILE = `<svg width="${WIDTH}" xmlns="http://www.w3.org/2000/svg">
