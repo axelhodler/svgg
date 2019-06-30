@@ -10,6 +10,7 @@ STYLE = `<style>
 
 WIDTH=150
 COLUMN_WIDTH=50
+BLOCK_HEIGHT=10
 const rectWithText = (x_offset, rect_y, text_y, text) => {
   return `
 <rect x="${x_offset}" y="${rect_y}" width="${COLUMN_WIDTH}" height="10" class="rect"/>
@@ -18,13 +19,13 @@ const rectWithText = (x_offset, rect_y, text_y, text) => {
 }
 
 const scriptRect = (text, index) => {
-  rect_y = index * 10
+  rect_y = index * BLOCK_HEIGHT
   text_y = rect_y + 8
   return rectWithText(0, rect_y, text_y, text)
 }
 
-const stackRect = (text, index) => {
-  rect_y = index * 10
+const stackRect = (y_offset, text, index) => {
+  rect_y = index * BLOCK_HEIGHT + y_offset
   text_y = rect_y + 8
   return rectWithText(COLUMN_WIDTH * 2, rect_y, text_y, text)
 }
@@ -34,7 +35,8 @@ contents = script_opcodes.map((element, index) => {
 })
 
 stack_contents = stack_state.map((element, index) => {
-  return stackRect(element, index)
+  y_offset = (script_opcodes.length - stack_state.length) * BLOCK_HEIGHT
+  return stackRect(y_offset, element, index)
 })
 
 FILE = `<svg width="${WIDTH}" xmlns="http://www.w3.org/2000/svg">
