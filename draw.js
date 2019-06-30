@@ -8,17 +8,17 @@ STYLE = `<style>
 </style>`
 
 WIDTH=50
-const rectWithText = (rect_y, text_y, text) => {
+const rectWithText = (rect_x, text_x, rect_y, text_y, text) => {
   return `
-<rect y="${rect_y}" width="${WIDTH}" height="10" class="rect"/>
-<text y="${text_y}" class="text">${text}</text>
+<rect x="${rect_x}" y="${rect_y}" width="${WIDTH}" height="10" class="rect"/>
+<text x="${text_x}" y="${text_y}" class="text">${text}</text>
 `
 }
 
 const scriptRect = (text, index) => {
   rect_y = index * 10
   text_y = rect_y + 8
-  return rectWithText(rect_y, text_y, text)
+  return rectWithText(0, 0, rect_y, text_y, text)
 }
 
 contents = script_opcodes.map((element, index) => {
