@@ -33,10 +33,13 @@ const stackRect = (y_offset, text, index) => {
 const delta = script_opcodes.length - stack_state.length
 opcode_y_offset = 20
 stack_y_offset = 20
+HEIGHT=20
 if (delta < 0) { // stack is higher
   opcode_y_offset += (stack_state.length - script_opcodes.length) * BLOCK_HEIGHT
+  HEIGHT += stack_state.length * BLOCK_HEIGHT
 } else { // more opcodes than stack size
   stack_y_offset += (script_opcodes.length - stack_state.length) * BLOCK_HEIGHT
+  HEIGHT += script_opcodes.length * BLOCK_HEIGHT
 }
 
 contents = script_opcodes.map((element, index) => {
@@ -47,7 +50,7 @@ stack_contents = stack_state.map((element, index) => {
   return stackRect(stack_y_offset, element, index)
 })
 
-FILE = `<svg width="${WIDTH}" xmlns="http://www.w3.org/2000/svg">
+FILE = `<svg width="${WIDTH}" height="${HEIGHT}" xmlns="http://www.w3.org/2000/svg">
   ${STYLE}${contents.join("")}
   <text x="0" y="10" class="text">Script</text>
   <text x="100" y="10" class="text">Stack</text>
