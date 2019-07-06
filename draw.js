@@ -31,9 +31,10 @@ const stackRect = (y_offset, text, index) => {
 }
 
 const delta = script_opcodes.length - stack_state.length
-opcode_y_offset = 20
-stack_y_offset = 20
-HEIGHT=20
+TITLE_RESERVED_HEIGHT = 20
+opcode_y_offset = TITLE_RESERVED_HEIGHT
+stack_y_offset = TITLE_RESERVED_HEIGHT
+HEIGHT = TITLE_RESERVED_HEIGHT
 if (delta < 0) { // stack is higher
   opcode_y_offset += (stack_state.length - script_opcodes.length) * BLOCK_HEIGHT
   HEIGHT += stack_state.length * BLOCK_HEIGHT
