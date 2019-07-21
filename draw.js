@@ -8,13 +8,16 @@ STYLE = `<style>
   .rect { fill:white;stroke:black;stroke-width:1 }
 </style>`
 
-WIDTH=151
+WIDTH=171
 COLUMN_WIDTH=50
 BLOCK_HEIGHT=10
+TEXT_DISTANCE_FROM_RECT=5
 const rectWithText = (x_offset, rect_y, text_y, text) => {
+  const text_offset_in_rect = x_offset + TEXT_DISTANCE_FROM_RECT
+  const rect_width = COLUMN_WIDTH + (TEXT_DISTANCE_FROM_RECT*2)
   return `
-<rect x="${x_offset}" y="${rect_y}" width="${COLUMN_WIDTH}" height="10" class="rect"/>
-<text x="${x_offset}" y="${text_y}" class="text">${text}</text>
+<rect x="${x_offset}" y="${rect_y}" width="${rect_width}" height="10" class="rect"/>
+<text x="${text_offset_in_rect}" y="${text_y}" class="text">${text}</text>
 `
 }
 
