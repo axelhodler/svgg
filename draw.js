@@ -1,7 +1,10 @@
 const fs = require('fs')
 const process = require('process')
 const script_opcodes = process.argv[2].split(",")
-const stack_state = process.argv[3].split(",")
+var stack_state = []
+if (process.argv[3]) {
+  stack_state = process.argv[3].split(",")
+}
 
 STYLE = `<style>
   .text { font: 9px sans-serif; }
